@@ -74,7 +74,7 @@ const inputResponse = () => {
     }
 
     const addRole = async () => {        
-        const viewDepartments = await getDapartments();
+        const viewDepartments = await getDepartments();
         inquirer.prompt([
             {
                 type: 'input',
@@ -234,12 +234,38 @@ const deleteEmployee = async () => {
         });
     }
 
+    // LIST pull for functions ------------------------------------------
+    const getDepartments = async () => {  
+        const data = await db.promise().query(`SELECT name FROM departments;`);
+        const departmentsObject = data[0];
+        const viewDepartments = [];
+        for (let i = 0; i < departmentsObject.length; i++) {
+            viewDepartments.push(departmentsObject[i].name);
+        };
+        return viewDepartments;
+    };
+    
+    const getRoles = async () => {
+        const data = await db.promise().query(`SELECT title FROM roles;`);
+        const rolesObject = data[0];
+        const viewRoles = [];
+        for (let i = 0; i < rolesObject.length; i++) {
+            viewRoles.push(rolesObject[i].title);
+        };
+        return viewRoles;
+    }
+    
+    const getEmployees = async () => {
+        const data = await db.promise().query(`SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees;`);
+        const employeesObject = data[0];
+        const viewEmployees = [];
+        for (let i = 0; i < employeesObject.length; i++) {
+            viewEmployees.push(employeesObject[i].full_name);
+        };
+        return viewEmployees;
+    }
 
-
-
-
-
-// Input selector prompts
+    // PROMPT for user input --------------------------------------
     const selectInput = () => {
         inquirer
         .prompt([
@@ -283,18 +309,6 @@ const deleteEmployee = async () => {
     }
     selectInput();
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 const init = () => {
     startPrompt();
