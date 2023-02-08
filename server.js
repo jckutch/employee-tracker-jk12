@@ -76,9 +76,7 @@ const inputResponse = () => {
 
     const addRole = async () => {        
         const viewDepartments = await getDapartments();
-
-        inquirer
-        .prompt([
+        inquirer.prompt([
             {
                 type: 'input',
                 name: 'title',
@@ -111,11 +109,65 @@ const inputResponse = () => {
                 if (err) {
                     console.log(err);
                 }
-    
                 selectInput();
             });
         });
     }
+
+    const addEmployee = async () => {
+        const viewRoles = await getRoles();
+        const viewManagers = await getEmployees();
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'firstName',
+                message: "What is the employee's first name?"
+            },
+            {
+                type: 'input',
+                name: 'lastName',
+                message: "What is the employee's last name?"
+            },
+            {
+                type: 'list',
+                name: 'role',
+                message: "What is the employee's role?",
+                choices: viewRoles
+            },
+            {
+                type: 'list',
+                name: 'manager',
+                message: "Who is the employee's manager?",
+                choices: viewManagers
+            }
+        ])
+        .then((answers) => {
+            const chosenRole = answers.role;
+            let chosenRoleID;
+            for (let i = 0; i < viewRoles.length; i++) {
+                if (chosenRole == viewRoles[i]) {
+                    chosenRoleID = i + 1;
+                };
+            };
+            const chosenManager = answers.manager;
+            let chosenManagerID;
+            for (let i = 0; i < viewManagers.length; i++) {
+                if (chosenManager == viewManagers[i]) {
+                    chosenManagerID = i + 1;
+                };
+            };
+            const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?)`;
+            const params = [answers.firstName, answers.lastName, chosenRoleID, chosenManagerID];
+            
+            db.query(sql, [params], (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                selectInput();
+            });
+        });
+    }
+    
     
 
 
@@ -152,6 +204,8 @@ const inputResponse = () => {
                 addDepartment();
             } else if (answers.decision === 'Add a role') {
                 addRole();
+            } else if (answers.decision === 'Add an employee') {
+                addEmployee();
             }
         });
     }
