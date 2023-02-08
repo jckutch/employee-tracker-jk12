@@ -55,8 +55,7 @@ const inputResponse = () => {
         });
     }
 
-// ADD function for departments, roles, employee ----------------------------------
-
+// ADD function for departments, roles, employees ----------------------------------
     const addDepartment = () => {inquirer.prompt([{
                 type: 'input',
                 name: 'name',
@@ -158,7 +157,6 @@ const inputResponse = () => {
             };
             const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?)`;
             const params = [answers.firstName, answers.lastName, chosenRoleID, chosenManagerID];
-            
             db.query(sql, [params], (err, result) => {
                 if (err) {
                     console.log(err);
@@ -167,8 +165,74 @@ const inputResponse = () => {
             });
         });
     }
-    
-    
+
+// DELETE function for employees ------------------------------------------
+const deleteEmployee = async () => {        
+    const viewEmployees = await getEmployees();
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'employee',
+            message: 'Which employee needs to be deleted?',
+            choices: viewEmployees
+        }
+    ])
+    .then((answers) => {
+        const chosenEmployee = answers.employee;
+        let chosenEmployeeID;
+        for (let i = 0; i < viewEmployees.length; i++) {
+            if (chosenEmployee == viewEmployees[i]) {
+                chosenEmployeeID = i + 1;
+            };
+        };
+        const sql = `DELETE FROM employees WHERE employees.id = ?`;
+        const params = chosenEmployeeID;
+        db.query(sql, params, (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            selectInput();
+        });
+    });
+}
+
+// UPDATE function for employee role --------------------------------------
+    const updateRole = async () => {
+        const viewEmployees = await getEmployees();
+        const viewRoles = await getRoles();
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'employee',
+                message: "Which employee's role do you want to update?",
+                choices: viewEmployees
+            },
+            {
+                type: 'list',
+                name: 'role',
+                message: 'Which role do you want to assign to the selected employee?',
+                choices: viewRoles
+            }
+        ])
+        .then((answers) => {
+            const chosenRole = answers.role;
+            let chosenRoleID;
+            for (let i = 0; i < viewRoles.length; i++) {
+                if (chosenRole == viewRoles[i]) {
+                    chosenRoleID = i + 1;
+                };
+            };
+            const sql = `UPDATE employees SET role_id = ? WHERE CONCAT(first_name, ' ', last_name) = ?`;
+            const params = [chosenRoleID, answers.employee];
+            
+            db.query(sql, params, (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                selectInput();
+            });
+        });
+    }
 
 
 
@@ -189,6 +253,7 @@ const inputResponse = () => {
                             'Add a new department',
                             'Add a new role',
                             'Add a new employee',
+                            'Delete an employee',
                             "Update an employee's role",
                             'Quit'],
             }
@@ -206,10 +271,16 @@ const inputResponse = () => {
                 addRole();
             } else if (answers.decision === 'Add an employee') {
                 addEmployee();
+            } else if (answers.decision === 'Delete an employee') {
+                deleteEmployee();
+            } else if (answers.decision === "Update an employee's role") {
+                updateRole();
+            } else {
+                console.log('Employee Tracker has ended, bye!');
+                return init()
             }
-        });
+        }); 
     }
-
     selectInput();
 }
 
