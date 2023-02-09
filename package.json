@@ -1,7 +1,7 @@
 {
-  "name": "employee-tracker-jk12-take-3",
+  "name": "employee-tracker-jk12",
   "version": "1.0.0",
-  "description": "",
+  "description": "Employee Tracker access and update information on company employees.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jckutch/employee-tracker-jk12-take-3.git"
+    "url": "git+https://github.com/jckutch/employee-tracker-jk12.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jckutch/employee-tracker-jk12-take-3/issues"
+    "url": "https://github.com/jckutch/employee-tracker-jk12/issues"
   },
-  "homepage": "https://github.com/jckutch/employee-tracker-jk12-take-3#readme",
+  "homepage": "https://github.com/jckutch/employee-tracker-jk12#readme",
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^8.2.4",
