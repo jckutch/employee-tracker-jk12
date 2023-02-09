@@ -59,7 +59,7 @@ const inputResponse = () => {
     const addDepartment = () => {inquirer.prompt([{
                 type: 'input',
                 name: 'name',
-                message: 'Enter the name of department?'
+                message: 'Enter name of new department.'
             }])
         .then((answers) => {
             const sql = `INSERT INTO departments (name) VALUES (?)`;
@@ -79,17 +79,17 @@ const inputResponse = () => {
             {
                 type: 'input',
                 name: 'title',
-                message: 'Enter the title of new role?'
+                message: 'Enter name of new role.'
             },
             {
                 type: 'input',
                 name: 'salary',
-                message: 'Enter the salary of new role?'
+                message: 'Enter salary amount for new role.'
             },
             {
                 type: 'list',
                 name: 'department',
-                message: 'Enter the department for new role?',
+                message: 'Select department name for new role?',
                 choices: viewDepartments
             }
         ])
@@ -120,23 +120,23 @@ const inputResponse = () => {
             {
                 type: 'input',
                 name: 'firstName',
-                message: "What is the employee's first name?"
+                message: "Enter employee first name."
             },
             {
                 type: 'input',
                 name: 'lastName',
-                message: "What is the employee's last name?"
+                message: "Enter employee last name."
             },
             {
                 type: 'list',
                 name: 'role',
-                message: "What is the employee's role?",
+                message: "Enter employee role.",
                 choices: viewRoles
             },
             {
                 type: 'list',
                 name: 'manager',
-                message: "Who is the employee's manager?",
+                message: "Enter employee manager.",
                 choices: viewManagers
             }
         ])
@@ -173,7 +173,7 @@ const deleteEmployee = async () => {
         {
             type: 'list',
             name: 'employee',
-            message: 'Which employee needs to be deleted?',
+            message: 'Select employee to delete.',
             choices: viewEmployees
         }
     ])
@@ -204,13 +204,13 @@ const deleteEmployee = async () => {
             {
                 type: 'list',
                 name: 'employee',
-                message: "Which employee's role do you want to update?",
+                message: "Select employee to update their role.",
                 choices: viewEmployees
             },
             {
                 type: 'list',
                 name: 'role',
-                message: 'Which role do you want to assign to the selected employee?',
+                message: 'Select title to update employee role',
                 choices: viewRoles
             }
         ])
