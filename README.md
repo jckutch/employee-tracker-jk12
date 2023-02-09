@@ -51,11 +51,11 @@ THEN I am prompted to select an employee to update and their new role and this i
 ## Installation 
   <a name="installation"></a>
     1) User can copy repository from github at: (https://github.com/jckutch/employee-tracker-jk12)<br />
-    2) Then install all dependencies with `npm i` in terminal.
-    3) Then in `server.js` replace line 11 password (*) with your (personal MySQL password).
-    4) Then log into MySQL by entering `mysql -u root -p` in the command line, using your personal password.
-    5) Then enter `quit` in MySQL and enter `npm start` in terminal to run application.
-
+    2) Then install all dependencies with `npm i` in terminal.<br />
+    3) Then in `server.js` replace line 11 password (*) with your (personal MySQL password).<br />
+    4) Then log into MySQL by entering `mysql -u root -p` in the command line, using your personal password.<br />
+    5) Then execute database by entering `SOURCE db/schema.sql` followed by ` SOURCE db/seeds.sql`.<br />
+    5) Then enter `quit` in MySQL and enter `npm start` in terminal to run application.<br />
 
 
 ## Usage
@@ -75,12 +75,15 @@ Repository Link:  https://github.com/jckutch/employee-tracker-jk12<br />
 
 ## Mockup
   <a name="mockup"></a>
-  Link to Mockup VIDEO: https://drive.google.com/file/d/1rwg-j-i1MO6daPGjO6StKREM_CBnIkx1/view
+  Link to Mockup VIDEO:<br />
+   https://drive.google.com/file/d/1U1bRbCtEWhxDGv5d3r3lJBGbJiwbXJlZ/view<br />
+   <br />
 
-Sample Images:
-![team-image](./assets/Departments_Screenshot%20.jpg)<br />
-![team-image](./assets/Roles_Screenshot.jpg)<br />
-![team-image](./assets/Employees_Screenshot.jpg)<br />
+<font color="#e9d66b">Sample Images:</font><br />
+
+![image](./assets/Departments_Screenshot%20.jpg)<br />
+![image](./assets/Roles_Screenshot.jpg)<br />
+![image](./assets/Employees_Screenshot.jpg)<br />
 
 
 ## License 
