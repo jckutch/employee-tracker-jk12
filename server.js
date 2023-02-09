@@ -11,11 +11,11 @@ const db = mysql.createConnection(
         password: '*',
         database: 'employee_db'
     },
-    console.log(`Connected to employee_db database.`)
+    console.log(`Connected to the employee_db database.`)
 );
 
 const startPrompt = () => {
-    console.log(`Welcome to the Employee Tracker!`);
+    console.log(`Welcome to EMPLOYEE TRACKER!`);
 }
 
 const inputResponse = () => {
@@ -279,8 +279,8 @@ const deleteEmployee = async () => {
                             'Add a new department',
                             'Add a new role',
                             'Add a new employee',
-                            'Delete an employee',
-                            "Update an employee's role",
+                            'Delete employee',
+                            'Update employee role',
                             'Quit'],
             }
         ])
@@ -291,15 +291,15 @@ const deleteEmployee = async () => {
                 viewAllRoles();
             } else if (answers.decision === 'View all employees') {
                 viewAllEmployees();
-            } else if (answers.decision === 'Add a department') {
+            } else if (answers.decision === 'Add a new department') {
                 addDepartment();
-            } else if (answers.decision === 'Add a role') {
+            } else if (answers.decision === 'Add a new role') {
                 addRole();
-            } else if (answers.decision === 'Add an employee') {
+            } else if (answers.decision === 'Add a new employee') {
                 addEmployee();
-            } else if (answers.decision === 'Delete an employee') {
+            } else if (answers.decision === 'Delete employee') {
                 deleteEmployee();
-            } else if (answers.decision === "Update an employee's role") {
+            } else if (answers.decision === 'Update employee role') {
                 updateRole();
             } else {
                 console.log('Employee Tracker has ended, bye!');
